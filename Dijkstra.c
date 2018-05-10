@@ -105,7 +105,8 @@ nodoEstructura *nodo = calloc(1, sizeof (nodoEstructura));
 
     case 3:
     system("clear");
-    printf("Escribe el nodo origen:");
+    getchar();
+printf("Escribe el nodo origen:");
 scanf("%c",&nodoEntradaAscii);
 int enteroNodoEntradaAscii=  (int)nodoEntradaAscii;
 if(enteroNodoEntradaAscii>122 || enteroNodoEntradaAscii<97){
@@ -128,6 +129,18 @@ printf("\n\t\t %c \t\t %c \t\t %d \n",nodoEntradaAscii,nodoEntradaAscii,0);
 dijkstra(nodo, enteroNodoEntradaAscii,enteroNodoDestinoAscii);
 funcionDireccionamiento(nodo, enteroNodoDestinoAscii);
 
+propiedadesTxt=fopen(archivoPropiedades,"r");
+ printf("\n\n\t\tReferencia\n\n");
+ while (fscanf(topologiaTxt,"%s\t%s \n",letraComparar,edificio) != EOF){
+   j++;
+   for(int contadori = 0; letraComparar[contadori]; contadori++) {
+     printf("\t\t%c\t%s\n", letraComparar[contadori],edificio);
+   }
+
+ }
+ fclose (propiedadesTxt);
+ getchar();
+ getchar();
       break;
 
     case 4:
