@@ -7,30 +7,30 @@
 int main(int argc, char const *argv[])
 {
 
-FILE *propiedadesTxt; //leer el archivo de propiedades
-FILE *topologiaTxt; //lee el archivo de topologia
+  FILE *propiedadesTxt; //leer el archivo de propiedades
+  FILE *topologiaTxt; //lee el archivo de topologia
 
-int i=0,j=0;
-int nodoEntrada=0;
-int contadorNodosEntrada=0;
-int contadorNodosSalida=0;
-int contadorLongitud=0;
-int res;
-char nodoEntradaAscii;
-char nodoDestinoAscii;
-char archivoTopologia[]= "topologia.txt";
-char archivoPropiedades[]= "properties.txt";
-char letraComparar[20];
-char edificio[20];
+  int i=0,j=0;
+  int nodoEntrada=0;
+  int contadorNodosEntrada=0;
+  int contadorNodosSalida=0;
+  int contadorLongitud=0;
+  int res;
+  char nodoEntradaAscii;
+  char nodoDestinoAscii;
+  char archivoTopologia[]= "topologia.txt";
+  char archivoPropiedades[]= "properties.txt";
+  char letraComparar[20];
+  char edificio[20];
 
-//variables para el menú
-char opcion[15];
-int opcionMenu=0;
-int valida=0;
-int contadori=0;
-//declaracion de la estructura almacenando un espacio en la memoria
-struct arrChar aux;
-nodoEstructura *nodo = calloc(1, sizeof (nodoEstructura));
+  //variables para el menú
+  char opcion[15];
+  int opcionMenu=0;
+  int valida=0;
+  int contadori=0;
+  //declaracion de la estructura almacenando un espacio en la memoria
+  struct arrChar aux;
+  nodoEstructura *nodo = calloc(1, sizeof (nodoEstructura));
 
 
   do {
@@ -71,76 +71,76 @@ nodoEstructura *nodo = calloc(1, sizeof (nodoEstructura));
       break;
 
     case 2:
-    topologiaTxt=fopen(archivoTopologia,"r");
-    if(topologiaTxt==NULL)
-    {
-     printf("NO existe el archivo\n");
-   }
-   else
-   {
-     while (fscanf(topologiaTxt,"%s %s %s",aux.nodosEntrada,aux.nodoSalida,aux.longitud) != EOF)
-     {
-         j++;
-       int auxEntero= aux.longitud[0] - '0';
-       agregarArista(nodo,toascii(aux.nodosEntrada[0]), toascii(aux.nodoSalida[0]), auxEntero);
+      topologiaTxt=fopen(archivoTopologia,"r");
+      if(topologiaTxt==NULL)
+	{
+	  printf("NO existe el archivo\n");
+	}
+      else
+	{
+	  while (fscanf(topologiaTxt,"%s %s %s",aux.nodosEntrada,aux.nodoSalida,aux.longitud) != EOF)
+	    {
+	      j++;
+	      int auxEntero= aux.longitud[0] - '0';
+	      agregarArista(nodo,toascii(aux.nodosEntrada[0]), toascii(aux.nodoSalida[0]), auxEntero);
 
-     }
-   }
-     fclose (topologiaTxt);
+	    }
+	}
+      fclose (topologiaTxt);
 
-    propiedadesTxt=fopen(archivoPropiedades,"r");
-     printf("\n\n\t\tReferencia\n\n");
-     while (fscanf(topologiaTxt,"%s\t%s \n",letraComparar,edificio) != EOF){
-       j++;
-       for(int contadori = 0; letraComparar[contadori]; contadori++) {
-         printf("\t\t%c\t%s\n", letraComparar[contadori],edificio);
-       }
+      propiedadesTxt=fopen(archivoPropiedades,"r");
+      printf("\n\n\t\tReferencia\n\n");
+      while (fscanf(topologiaTxt,"%s\t%s \n",letraComparar,edificio) != EOF){
+	j++;
+	for(int contadori = 0; letraComparar[contadori]; contadori++) {
+	  printf("\t\t%c\t%s\n", letraComparar[contadori],edificio);
+	}
 
-     }
-     fclose (propiedadesTxt);
+      }
+      fclose (propiedadesTxt);
 
-     getchar();
-     getchar();
+      getchar();
+      getchar();
       break;
 
     case 3:
-    system("clear");
-    getchar();
-printf("Escribe el nodo origen:");
-scanf("%c",&nodoEntradaAscii);
-int enteroNodoEntradaAscii=  (int)nodoEntradaAscii;
-if(enteroNodoEntradaAscii>122 || enteroNodoEntradaAscii<97){
-  printf("\n\n\t\t\t\n ERROR escribe una letra en minuscula de la a a la z \n");
-  exit(0);
-}
-printf("\n");
-getchar();
-printf("Escribe el nodo destino:");
-scanf("%c",&nodoDestinoAscii);
-int enteroNodoDestinoAscii=  (int)nodoDestinoAscii;
-if(enteroNodoDestinoAscii>122 || enteroNodoDestinoAscii<97){
-  printf("\n\n\t\t\t\n ERROR escribe una letra en minuscula de la a a la z \n");
-  exit(0);
-}
-//printf("\n\n\n\n\n\n Nodo salida %d",enteroNodoEntradaAscii);
-printf("\n\t\t\t *********Tabla de Ruteo ************\n\n\n");
-printf("\t Nodo Origen \t Nodo Destino \t Distancia\n");
-printf("\n\t\t %c \t\t %c \t\t %d \n",nodoEntradaAscii,nodoEntradaAscii,0);
-dijkstra(nodo, enteroNodoEntradaAscii,enteroNodoDestinoAscii);
-funcionDireccionamiento(nodo, enteroNodoDestinoAscii);
+      system("clear");
+      getchar();
+      printf("Escribe el nodo origen:");
+      scanf("%c",&nodoEntradaAscii);
+      int enteroNodoEntradaAscii=  (int)nodoEntradaAscii;
+      if(enteroNodoEntradaAscii>122 || enteroNodoEntradaAscii<97){
+	printf("\n\n\t\t\t\n ERROR escribe una letra en minuscula de la a a la z \n");
+	exit(0);
+      }
+      printf("\n");
+      getchar();
+      printf("Escribe el nodo destino:");
+      scanf("%c",&nodoDestinoAscii);
+      int enteroNodoDestinoAscii=  (int)nodoDestinoAscii;
+      if(enteroNodoDestinoAscii>122 || enteroNodoDestinoAscii<97){
+	printf("\n\n\t\t\t\n ERROR escribe una letra en minuscula de la a a la z \n");
+	exit(0);
+      }
+      //printf("\n\n\n\n\n\n Nodo salida %d",enteroNodoEntradaAscii);
+      printf("\n\t\t\t *********Tabla de Ruteo ************\n\n\n");
+      printf("\t Nodo Origen \t Nodo Destino \t Distancia\n");
+      printf("\n\t\t %c \t\t %c \t\t %d \n",nodoEntradaAscii,nodoEntradaAscii,0);
+      dijkstra(nodo, enteroNodoEntradaAscii,enteroNodoDestinoAscii);
+      funcionDireccionamiento(nodo, enteroNodoDestinoAscii);
 
-propiedadesTxt=fopen(archivoPropiedades,"r");
- printf("\n\n\t\tReferencia\n\n");
- while (fscanf(topologiaTxt,"%s\t%s \n",letraComparar,edificio) != EOF){
-   j++;
-   for(int contadori = 0; letraComparar[contadori]; contadori++) {
-     printf("\t\t%c\t%s\n", letraComparar[contadori],edificio);
-   }
+      propiedadesTxt=fopen(archivoPropiedades,"r");
+      printf("\n\n\t\tReferencia\n\n");
+      while (fscanf(topologiaTxt,"%s\t%s \n",letraComparar,edificio) != EOF){
+	j++;
+	for(int contadori = 0; letraComparar[contadori]; contadori++) {
+	  printf("\t\t%c\t%s\n", letraComparar[contadori],edificio);
+	}
 
- }
- fclose (propiedadesTxt);
- getchar();
- getchar();
+      }
+      fclose (propiedadesTxt);
+      getchar();
+      getchar();
       break;
 
     case 4:
