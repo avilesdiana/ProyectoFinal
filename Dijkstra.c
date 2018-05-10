@@ -1,5 +1,19 @@
 /*----------------------------------------------------------------------------------------------------
   P R O Y E C T O    F I N A L     <TALLER DESARROLLO DE APLICACIONES
+
+  Programa que encuentra la ruta más corta para llegar de un origen a un
+  destino, mostrando los lugares por pasar usando el Algoritmo de dijkstra.
+
+  Fecha de Entrega: 10 de Mayo de 2018
+
+  Integrantes:
+
+  Diana Laura Aviles Elizalde
+  Juan Pablo Velasco Medina
+  Diego Patricio Gutierrez Lopez Cano
+
+  @Param: Archivo  Topologia y Propiedades
+  @Salidas: Armado de la topologia y tabla de ruteo.
   ---------------------------------------------------------------------------------------------------*/
 #include "funcionesGenerales.h"
 
@@ -57,7 +71,7 @@ int main(int argc, char const *argv[])
       if (sscanf(opcion, "%d", &opcionMenu) != 1) // Se valida que sea un numero entero.
 	{
 	  valida=1;
-	  validationError(valida);
+	  validationError(valida); //Valida los errores, Valida que ingresara datos correctos
 	  getchar();
 	  getchar();
 	}
@@ -67,10 +81,11 @@ int main(int argc, char const *argv[])
     switch (opcionMenu) {
     case 1:
       menuHelp();
-      getchar();
+      getchar(); //Muestra el menu de Ayuda
       break;
 
     case 2:
+    //Comieza la lectura del archivo de topologia
       topologiaTxt=fopen(archivoTopologia,"r");
       if(topologiaTxt==NULL)
 	{
@@ -79,15 +94,18 @@ int main(int argc, char const *argv[])
       else
 	{
 	  while (fscanf(topologiaTxt,"%s %s %s",aux.nodosEntrada,aux.nodoSalida,aux.longitud) != EOF)
-	    {
+         //Guarda cada registro en una estructura
+      {
 	      j++;
 	      int auxEntero= aux.longitud[0] - '0';
 	      agregarArista(nodo,toascii(aux.nodosEntrada[0]), toascii(aux.nodoSalida[0]), auxEntero);
+        //agrega la arista de los nodos leidos de la topología.
 
 	    }
 	}
       fclose (topologiaTxt);
 
+      //lee el archivo propiedades para ver los diferentes nodos existentes.
       propiedadesTxt=fopen(archivoPropiedades,"r");
       printf("\n\n\t\tReferencia\n\n");
       while (fscanf(topologiaTxt,"%s\t%s \n",letraComparar,edificio) != EOF){
@@ -106,6 +124,7 @@ int main(int argc, char const *argv[])
     case 3:
       system("clear");
       getchar();
+      //comieza el direccionamiento y las tablas de ruteo.
       printf("Escribe el nodo origen:");
       scanf("%c",&nodoEntradaAscii);
       int enteroNodoEntradaAscii=  (int)nodoEntradaAscii;
