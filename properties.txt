@@ -22,5 +22,5 @@ u CanchasTennis
 v CanchasFutbol
 w Vestidores
 x Cubo
-y Capetlic
+y Capeltic
 z Capilla
