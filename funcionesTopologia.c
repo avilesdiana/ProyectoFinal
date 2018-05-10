@@ -1,13 +1,21 @@
 #include "funcionesGenerales.h"
+/*
+@Author: Diana Laura Aviles Elizalde
+@References: Programacion Aplicada, Pablo Velasco, Patricio Cano
+*/
 
+/*Esta funcion crear un arista para realizar el enlace con un vertice y poder crear un grafo*/
 void agregarArista (nodoEstructura *nodo, int nodoOrigen, int nodoDestino, int costoArista) {
   printf("NODO ORIGEN %d\n\n",nodoOrigen);
   nodoOrigen = nodoOrigen - 'a';
   printf("NODO DESTINO %d\n\n",nodoDestino);
   nodoDestino = nodoDestino - 'a';
 
+//Agrega la arista por cada nodo
   agregaVertice(nodo, nodoOrigen);
   agregaVertice(nodo, nodoDestino);
+
+
   verticeE *auxVertice = nodo->vertices[nodoOrigen];
   if (auxVertice->longitudAristas >= auxVertice->tamanioArista) {
     auxVertice->tamanioArista = auxVertice->tamanioArista ? auxVertice->tamanioArista * 2 : 4;
@@ -19,6 +27,7 @@ void agregarArista (nodoEstructura *nodo, int nodoOrigen, int nodoDestino, int c
   auxVertice->aristas[auxVertice->longitudAristas++] = auxiliarArista;
 }
 
+//Agrega un vertice a la arista leida
 void agregaVertice (nodoEstructura *nodo, int i) {
   if (nodo->tamanioVertice < i + 1) {
     int tamanioNodo = nodo->tamanioVertice * 2 > i ? nodo->tamanioVertice * 2 : i + 4;
